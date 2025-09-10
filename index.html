@@ -45,47 +45,51 @@
             background-position: center;
             position: relative;
         }
-        .mobile-canvas-container {
-            position: absolute;
-            top: 22.5%;
-            left: 50%;
-            width: 53.5%;
-            transform: translateX(-50%);
-            aspect-ratio: 1 / 1;
-            overflow: hidden;
-        }
-        .mobile-controls {
-            position: absolute;
-            top: 56%;
-            left: 50%;
-            width: 50%;
-            height: 20%;
-            transform: translateX(-50%);
-            display: grid;
-            grid-template-areas: ". up ." "left . right" ". down .";
-            grid-template-rows: 1fr 1fr 1fr;
-            grid-template-columns: 1fr 1fr 1fr;
-        }
-        .touch-btn {
-            opacity: 0; /* Buttons are invisible */
-            cursor: pointer;
-            -webkit-tap-highlight-color: rgba(255,255,255,0.2);
-        }
-        #btn-up { grid-area: up; }
-        #btn-down { grid-area: down; }
-        #btn-left { grid-area: left; }
-        #btn-right { grid-area: right; }
-
-        /* --- PC Game Container --- */
-        .pc-container {
-            display: none; /* Hidden by default */
-            border: 4px solid #FFFFFF;
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
-            background-color: #2C3E50;
-            position: relative;
-        }
-
-        /* --- Modals --- */
+       /* Add this new code starting at line 49 */
+.mobile-wrapper {
+    display: none; 
+    width: 100%; height: 100%;
+    background-color: #333;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    box-sizing: border-box;
+}
+.mobile-canvas-container {
+    flex-grow: 1; /* Game screen takes available space */
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 20px;
+}
+.mobile-controls {
+    width: 100%;
+    max-width: 300px;
+    display: grid;
+    grid-template-areas:
+        ". up ."
+        "left center right"
+        ". down .";
+    grid-gap: 10px;
+}
+.touch-btn {
+    background-color: #555;
+    border: 2px solid #777;
+    border-radius: 10px;
+    cursor: pointer;
+    aspect-ratio: 1 / 1; /* Makes buttons square */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    color: #ccc;
+    -webkit-tap-highlight-color: rgba(255,255,255,0.2);
+}
+.touch-btn:active {
+    background-color: #777;
+}
         .modal {
             position: fixed; top: 0; left: 0;
             width: 100%; height: 100%;
@@ -113,11 +117,16 @@
 </head>
 <body>
 
+<!-- Add this new code starting at line 128 -->
 <div id="mobileWrapper" class="mobile-wrapper">
-    <div class="mobile-canvas-container"><canvas id="mobileGameCanvas"></canvas></div>
+    <div class="mobile-canvas-container">
+        <canvas id="mobileGameCanvas"></canvas>
+    </div>
     <div class="mobile-controls">
-        <div id="btn-up" class="touch-btn"></div> <div id="btn-down" class="touch-btn"></div>
-        <div id="btn-left" class="touch-btn"></div> <div id="btn-right" class="touch-btn"></div>
+        <div id="btn-up" class="touch-btn">▲</div>
+        <div id="btn-down" class="touch-btn">▼</div>
+        <div id="btn-left" class="touch-btn">◄</div>
+        <div id="btn-right" class="touch-btn">►</div>
     </div>
 </div>
 
@@ -393,4 +402,5 @@
 
 </body>
 </html>
+
 
